@@ -1,0 +1,6 @@
+@meetspace.web_HostAddress = http://localhost:5064
+
+GET {{meetspace.web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

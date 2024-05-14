@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\let.book.meeting.room.csproj": {}
+    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\let.book.meeting.room.csproj": {
+    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\let.book.meeting.room.csproj",
-        "projectName": "let.book.meeting.room",
-        "projectPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\let.book.meeting.room.csproj",
+        "projectUniqueName": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj",
+        "projectName": "meetspace.web",
+        "projectPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj",
         "packagesPath": "C:\\Users\\oussa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\obj\\",
+        "outputPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\oussa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,21 +45,35 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.DotNet.ILCompiler": {
-              "suppressParent": "All",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.4, )",
-              "autoReferenced": true
+              "noWarn": [
+                "NU1605"
+              ]
             },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
+            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
               "target": "Package",
               "version": "[8.0.4, )",
-              "autoReferenced": true
+              "noWarn": [
+                "NU1605"
+              ]
+            },
+            "Microsoft.Identity.Web": {
+              "target": "Package",
+              "version": "[2.15.2, )"
+            },
+            "Microsoft.Identity.Web.DownstreamApi": {
+              "target": "Package",
+              "version": "[2.15.2, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.19.6, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
             }
           },
           "imports": [
@@ -73,12 +87,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
-              "version": "[8.0.4, 8.0.4]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
