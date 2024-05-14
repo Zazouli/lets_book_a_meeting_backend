@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj": {}
+    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\meetspace.web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj": {
+    "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\meetspace.web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj",
+        "projectUniqueName": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\meetspace.web.csproj",
         "projectName": "meetspace.web",
-        "projectPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\meetspace.web.csproj",
+        "projectPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\meetspace.web.csproj",
         "packagesPath": "C:\\Users\\oussa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\meetspace.web\\obj\\",
+        "outputPath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_book_a_meeting_backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\oussa\\AppData\\Roaming\\NuGet\\NuGet.Config",
