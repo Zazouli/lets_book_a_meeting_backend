@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "zNVfpu/E5vnOKYUJlzTmHTL8wak6Lfj8vKg0acop5BuIF0fgHV5d4Wjl84R8nNjQgpK+02Hoi8RovRNCMa711w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\oussa\\OneDrive\\Desktop\\lets_meet_project_backend\\let.book.meeting.room\\let.book.meeting.room.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\oussa\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.4\\microsoft.dotnet.ilcompiler.8.0.4.nupkg.sha512",
+    "C:\\Users\\oussa\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.4\\microsoft.net.illink.tasks.8.0.4.nupkg.sha512",
+    "C:\\Users\\oussa\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.6\\microsoft.visualstudio.azure.containers.tools.targets.1.19.6.nupkg.sha512",
+    "C:\\Users\\oussa\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\8.0.4\\runtime.win-x64.microsoft.dotnet.ilcompiler.8.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
