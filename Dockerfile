@@ -22,4 +22,9 @@ RUN dotnet publish "./meetspace.web.csproj" -c $BUILD_CONFIGURATION -o /app/publ
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+# Copy the certificate file to the container
+COPY ["C:\\Users\\oussa\\OneDrive\\Document\\myCertificate.pfx", "app/myCertificate.pfx"]
+
+# Set file permissions (if necessary)
+RUN chmod 600 /app/certificate.pfx
 ENTRYPOINT ["dotnet", "meetspace.web.dll"]

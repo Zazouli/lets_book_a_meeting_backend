@@ -4,10 +4,9 @@ using Microsoft.Identity.Web.Resource;
 
 namespace meetspace.web.Controllers
 {
-    [Authorize]
     [ApiController]
+    [Authorize]
     [Route("[controller]")]
-    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -25,6 +24,7 @@ namespace meetspace.web.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var claims = User?.Claims?.Select(c => new { c.Type, c.Value }).ToList();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

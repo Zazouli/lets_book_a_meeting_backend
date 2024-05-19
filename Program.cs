@@ -1,17 +1,96 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
+//var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+//store.Open(OpenFlags.ReadOnly);
+//var certs = store.Certificates.Find(X509FindType.FindByThumbprint, "271429e22af71b61a43c684d6069e2dd16d5e9df", false);
+//store.Close();
+
+//if (certs.Count == 0)
+//{
+//    throw new Exception("Certificate not found");
+//}
+
+//var certificate = certs[0];
+
+var certificatePath = @$"{Directory.GetCurrentDirectory()}/myCertificate.pfx";
+var certificatePassword = "Meoz1029384756";
+
+// Ensure the file path is correct
+if (!System.IO.File.Exists(certificatePath))
+{
+    throw new FileNotFoundException($"Certificate file not found at {certificatePath}");
+}
+
+var certificateDescription = CertificateDescription.FromPath(certificatePath, certificatePassword);
+
+var config = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.json")
+                 .Build();
 
 // Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddControllers();
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
+// Configure Azure AD Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi()
+    .AddInMemoryTokenCaches();
+
+// Configure the Microsoft Identity options with the certificate
+builder.Services.Configure<MicrosoftIdentityOptions>(options =>
+{
+    options.ClientCertificates = new List<CertificateDescription> { certificateDescription };
+});
+
+builder.Services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
+        {
+            // Load the signing keys from Azure AD metadata
+            var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
+                $"{parameters.ValidIssuer}/.well-known/openid-configuration",
+                new OpenIdConnectConfigurationRetriever());
+
+            var config = configurationManager.GetConfigurationAsync(CancellationToken.None).Result;
+            return config.SigningKeys;
+        },
+        ValidIssuer = $"https://sts.windows.net/{config["AzureAd:TenantId"]}/",
+        ValidAudience = "api://8b70fd3b-18ce-4d8e-a91f-dbb5cf889c95",
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -21,11 +100,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+});
+//app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
-
+app.Use(async (context, next) =>
+{
+    if (context.Request.Headers.ContainsKey("Authorization"))
+    {
+        var token = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+        Console.WriteLine($"Received Token: {token}");
+    }
+    await next();
+});
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
