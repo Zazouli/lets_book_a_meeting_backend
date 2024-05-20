@@ -2,3 +2,4 @@ obj/
 bin/
 .vs/
 myCertificate.pxf
+./appsettings.Development.json

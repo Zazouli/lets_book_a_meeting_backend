@@ -7,22 +7,20 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
+using meetspace.web.Microsoft.Extensions.DependencyInjection;
+using MediatR;
+using System.Reflection;
+using meetspace.room.management.module.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-//var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-//store.Open(OpenFlags.ReadOnly);
-//var certs = store.Certificates.Find(X509FindType.FindByThumbprint, "271429e22af71b61a43c684d6069e2dd16d5e9df", false);
-//store.Close();
 
-//if (certs.Count == 0)
-//{
-//    throw new Exception("Certificate not found");
-//}
-
-//var certificate = certs[0];
+var config = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.Development.json")
+                 .Build();
 
 var certificatePath = @$"{Directory.GetCurrentDirectory()}/myCertificate.pfx";
-var certificatePassword = "Meoz1029384756";
+var certificatePassword = config["AzureAd:Password"];
 
 // Ensure the file path is correct
 if (!System.IO.File.Exists(certificatePath))
@@ -32,10 +30,8 @@ if (!System.IO.File.Exists(certificatePath))
 
 var certificateDescription = CertificateDescription.FromPath(certificatePath, certificatePassword);
 
-var config = new ConfigurationBuilder()
-                 .SetBasePath(Directory.GetCurrentDirectory())
-                 .AddJsonFile("appsettings.json")
-                 .Build();
+// AddDependencies
+builder.Services.AddRoomManagementDependencies(config);
 
 // Add services to the container.
 
@@ -79,7 +75,7 @@ builder.Services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationSch
             return config.SigningKeys;
         },
         ValidIssuer = $"https://sts.windows.net/{config["AzureAd:TenantId"]}/",
-        ValidAudience = "api://8b70fd3b-18ce-4d8e-a91f-dbb5cf889c95",
+        ValidAudience = config["AzureAd:Audiance"],
         ValidateIssuer = false,
         ValidateAudience = false,
         ValidateLifetime = true,

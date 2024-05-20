@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meetspace.web", "meetspace.web.csproj", "{FE1F510B-F20C-429C-B29A-D70F6FFAF521}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "meetspace.web", "meetspace.web.csproj", "{FE1F510B-F20C-429C-B29A-D70F6FFAF521}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "meetspace.room.management.module", "..\meetspace.room.management.module\meetspace.room.management.module.csproj", "{E7E5901F-8B21-4D6B-842F-B5680B04C306}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meetspace.functions", "..\meetspace.functions\meetspace.functions.csproj", "{92D7E43E-6535-44A6-8999-88982CC4BCB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{FE1F510B-F20C-429C-B29A-D70F6FFAF521}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE1F510B-F20C-429C-B29A-D70F6FFAF521}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE1F510B-F20C-429C-B29A-D70F6FFAF521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E5901F-8B21-4D6B-842F-B5680B04C306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E5901F-8B21-4D6B-842F-B5680B04C306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E5901F-8B21-4D6B-842F-B5680B04C306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E5901F-8B21-4D6B-842F-B5680B04C306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D7E43E-6535-44A6-8999-88982CC4BCB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D7E43E-6535-44A6-8999-88982CC4BCB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D7E43E-6535-44A6-8999-88982CC4BCB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D7E43E-6535-44A6-8999-88982CC4BCB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
